@@ -53,7 +53,9 @@ app.post('/api/sources', (async (req, res, next) => {
       return;
     }
 
+    console.log('Received question:', question);
     const sources = await qaService.getSources(question);
+    console.log('Sources:', sources);
     res.json(sources);
   } catch (error) {
     next(error);
