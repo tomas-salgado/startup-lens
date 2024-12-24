@@ -17,6 +17,7 @@ export default function Home() {
   const [sources, setSources] = useState<VideoSource[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [hasSearched, setHasSearched] = useState(false);
 
   const suggestedPrompts = [
     "How to find a co-founder?",
@@ -34,6 +35,7 @@ export default function Home() {
     setLoading(true);
     setError('');
     setSources([]);
+    setHasSearched(true);
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sources`, {
@@ -54,6 +56,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <div className={styles.background} />
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.iconWrapper}>
@@ -111,7 +114,7 @@ export default function Home() {
           </div>
         )}
 
-        {!loading && !error && sources.length === 0 && question.trim() && (
+        {!loading && !error && hasSearched && sources.length === 0 && (
           <div className={styles.noResults}>
             No relevant video clips found.
           </div>
@@ -137,11 +140,6 @@ export default function Home() {
             ))}
           </div>
         )}
-
-        <div className={styles.disclaimer}>
-          This is an unofficial tool not affiliated with Y Combinator.
-          Y Combinator is a trademark of Y Combinator Management, LLC.
-        </div>
       </div>
     </main>
   );
