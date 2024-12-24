@@ -1,0 +1,283 @@
+.main {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 5rem 1rem 4rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.iconWrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #f3f4f6;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  padding: 0.5rem;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: #FF6B3D;
+  margin-bottom: 0.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.subtitle {
+  color: #4b5563;
+  margin-bottom: 4rem;
+}
+
+.promptSection {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.promptTitle {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.promptGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.promptButton {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: #374151;
+  background-color: #f3f4f6;
+  transition: background-color 0.2s;
+}
+
+.promptButton:hover {
+  background-color: #e5e7eb;
+}
+
+.inputForm {
+  background-color: #f3f4f6;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #374151;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #6b7280;
+}
+
+.charCount {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.sendButton {
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.sendButton:hover:not(:disabled) {
+  color: #374151;
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fef2f2;
+  border-radius: 0.75rem;
+  color: #b91c1c;
+}
+
+.answer {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.answerContent {
+  max-width: none;
+  color: #111827;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.sendIcon {
+  transform: rotate(90deg);
+}
+
+.disclaimer {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  padding: 1.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(248, 250, 252, 0.95);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.sourceVideos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  max-width: 100%;
+  justify-items: center;
+}
+
+.videoContainer {
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  width: 800px;
+}
+
+.videoTitle {
+  padding: 1.25rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.videoName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.chapterName {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #374151;
+  padding-left: 0.75rem;
+  border-left: 3px solid #ff6b6b;
+  line-height: 1.3;
+}
+
+.videoContainer iframe {
+  width: 800px;
+  height: 450px;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 840px) {
+  .sourceVideos {
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+
+  .videoContainer, .videoContainer iframe {
+    width: 100%;
+  }
+}
+
+.resultsContainer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.resultsTitle {
+  font-size: 1.25rem;
+  color: #111827;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.videoCard {
+  background: #f8fafc;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.videoTitle {
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.chapterName {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+} 

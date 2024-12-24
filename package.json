@@ -1,0 +1,29 @@
+{
+  "name": "yc-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.33.1",
+    "@pinecone-database/pinecone": "^4.0.0",
+    "@types/express": "^5.0.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "html-entities": "^2.5.2",
+    "openai": "^4.77.0",
+    "ts-node": "^10.9.2",
+    "undici-types": "^6.20.0"
+  },
+  "description": ""
+}
