@@ -13,7 +13,15 @@ const qaService = new QAService();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://startuplens-test.vercel.app',
+    'https://startuplens.app'
+  ],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
 // Add timeout middleware
 app.use((_: Request, res: Response, next: NextFunction) => {
