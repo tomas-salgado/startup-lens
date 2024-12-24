@@ -3,8 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
 import styles from '../page.module.css';
-import Image from 'next/image';
-import ycLogo from '../img/yc-logo.png';
+import Logo from '../../../components/Logo';
 import Link from 'next/link';
 
 function WatchContent() {
@@ -26,14 +25,7 @@ function WatchContent() {
         <div className={styles.container}>
           <header className={styles.header}>
             <Link href="/" className={styles.iconWrapper}>
-              <Image 
-                src={ycLogo.src} 
-                alt="Y Combinator Logo" 
-                className={styles.logo}
-                width={56}
-                height={56}
-                priority
-              />
+              <Logo width={40} height={40} color="#FF6B3D" />
             </Link>
             <h1 className={styles.title}>Startup Lens</h1>
           </header>
@@ -58,14 +50,7 @@ function WatchContent() {
       <div className={styles.container}>
         <header className={`${styles.header} ${styles.watchHeader}`}>
           <Link href="/" className={styles.iconWrapper}>
-            <Image 
-              src={ycLogo.src} 
-              alt="Y Combinator Logo" 
-              className={styles.logo}
-              width={56}
-              height={56}
-              priority
-            />
+            <Logo width={40} height={40} color="#FF6B3D" />
           </Link>
           <h1 className={styles.title}>Startup Lens</h1>
           <p className={styles.subtitle}>

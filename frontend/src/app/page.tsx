@@ -3,8 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './page.module.css';
 import { SendIcon, ShareIcon } from './icons';
-import ycLogo from './img/yc-logo.png';
-import Image from 'next/image';
+import Logo from '../../components/Logo';
 
 interface VideoSource {
   videoName: string;
@@ -192,14 +191,7 @@ export default function Home() {
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.iconWrapper}>
-            <Image 
-              src={ycLogo.src} 
-              alt="Y Combinator Logo" 
-              className={styles.logo}
-              width={56}
-              height={56}
-              priority
-            />
+            <Logo width={40} height={40} color="#FF6B3D" />
           </div>
           <h1 className={styles.title}>Startup Lens</h1>
           <p className={styles.subtitle}>
