@@ -1,13 +1,13 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import styles from '../page.module.css';
 import Image from 'next/image';
 import ycLogo from '../img/yc-logo.png';
 import Link from 'next/link';
 
-export default function WatchPage() {
+function WatchContent() {
   const searchParams = useSearchParams();
   const videoId = searchParams.get('v');
   const timestamp = searchParams.get('t') || '0';
@@ -101,5 +101,13 @@ export default function WatchPage() {
         This is an unofficial tool not affiliated with Y Combinator. Y Combinator is a trademark of Y Combinator Management, LLC.
       </div>
     </main>
+  );
+}
+
+export default function WatchPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <WatchContent />
+    </Suspense>
   );
 } 
