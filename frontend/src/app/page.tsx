@@ -31,8 +31,8 @@ export default function Home() {
       "Tell me about AirBnB's early days",
       "How to pitch investors?",
       "Should I build an AI startup?",
-      "Remote team tips",
       "How do I come up with startup ideas?",
+      "Remote team tips",
       "Explain the different funding rounds",
     ]
   ];
