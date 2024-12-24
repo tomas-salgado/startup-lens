@@ -29,9 +29,9 @@ export default function Home() {
     ],
     [
       "Tell me about AirBnB's early days",
-      "Should I build an AI startup?",
       "How do I come up with startup ideas?",
       "Remote team tips",
+      "Should I build an AI startup?",
       "Explain the different funding rounds",
     ]
   ];
