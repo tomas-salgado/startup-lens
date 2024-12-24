@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
-import { SendIcon } from './icons';
+import { SendIcon, ShareIcon } from './icons';
 import ycLogo from './img/yc-logo.png';
 import Image from 'next/image';
 
@@ -41,7 +41,8 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
       onClick={handleShare}
       className={styles.shareButton}
     >
-      {copied ? 'Copied!' : 'Share'}
+      <ShareIcon />
+      {copied ? 'Copied!' : 'Share Clip'}
     </button>
   );
 };
