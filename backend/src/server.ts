@@ -35,23 +35,6 @@ app.use((_: Request, res: Response, next: NextFunction) => {
   }
 })();
 
-// QA endpoint
-app.post('/api/ask', (async (req, res, next) => {
-  try {
-    const { question, sources } = req.body as { question: string; sources: any[] };
-    
-    if (!question || !sources) {
-      res.status(400).json({ error: 'Question and sources are required' });
-      return;
-    }
-
-    const answer = await qaService.getLLMResponse(question, sources);
-    res.json(answer);
-  } catch (error) {
-    next(error);
-  }
-}) as express.RequestHandler);
-
 // Add new endpoint for getting sources
 app.post('/api/sources', (async (req, res, next) => {
   try {
