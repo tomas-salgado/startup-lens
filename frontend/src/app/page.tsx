@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import { SendIcon } from './icons';
 import ycLogo from './img/yc-logo.png';
@@ -37,9 +37,15 @@ export default function Home() {
     ]
   ];
 
+  useEffect(() => {
+    console.log('[PAGE_VIEW] Home page loaded');
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
+    
+    console.log(`[SEARCH] Query: "${question}"`);
     
     setLoading(true);
     setError('');
@@ -55,9 +61,13 @@ export default function Home() {
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Something went wrong');
+      
+      console.log(`[RESULTS] Found ${data.length} videos for query: "${question}"`);
+      
       setSources(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to get sources');
+      console.error(`[ERROR] Search failed for query: "${question}"`, err);
     } finally {
       setLoading(false);
     }
@@ -92,7 +102,10 @@ export default function Home() {
                 {[...allPrompts[0], ...allPrompts[0]].map((prompt, index) => (
                   <button
                     key={`row1-${index}`}
-                    onClick={() => setQuestion(prompt)}
+                    onClick={() => {
+                      console.log(`[PROMPT_CLICK] User clicked example: "${prompt}"`);
+                      setQuestion(prompt);
+                    }}
                     className={styles.promptButton}
                   >
                     {prompt}
@@ -149,7 +162,12 @@ export default function Home() {
         {sources.length > 0 && (
           <div className={styles.sourceVideos}>
             {sources.map((source, index) => (
-              <div key={index} className={styles.videoContainer}>
+              <div 
+                key={index} 
+                className={styles.videoContainer}
+                onClick={() => console.log(`[VIDEO_INTERACTION] User interacted with: "${source.videoName}" - ${source.chapterName}`)}
+                onLoad={() => console.log(`[VIDEO_LOAD] Loaded video: "${source.videoName}" - ${source.chapterName}`)}
+              >
                 <div className={styles.videoTitle}>
                   <div className={styles.videoName}>{source.videoName}</div>
                   <div className={styles.chapterName}>{source.chapterName}</div>
@@ -162,6 +180,8 @@ export default function Home() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
                   allowFullScreen
                   loading="lazy"
+                  onClick={() => console.log(`[VIDEO_CLICK] User clicked video: "${source.videoName}" - ${source.chapterName}`)}
+                  onPlay={() => console.log(`[VIDEO_PLAY] User started playing: "${source.videoName}" - ${source.chapterName}`)}
                 />
               </div>
             ))}
