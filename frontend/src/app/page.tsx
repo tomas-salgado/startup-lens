@@ -19,13 +19,22 @@ export default function Home() {
   const [error, setError] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
-  const suggestedPrompts = [
-    "How to find a co-founder?",
-    "What makes a good MVP?",
-    "How to get early users?",
-    "Tips for B2B sales?",
-    "How to measure startup growth?",
-    "Best practices for fundraising?",
+  const allPrompts = [
+    [
+      "Best YC interview tips",
+      "How to find a co-founder?",
+      "Should I build a startup in college?",
+      "How to validate ideas fast?",
+      "How do you balance work and life?",
+    ],
+    [
+      "Tell me about AirBnB's early days",
+      "How to pitch investors?",
+      "Should I build an AI startup?",
+      "Remote team tips",
+      "How do I come up with startup ideas?",
+      "Explain the different funding rounds",
+    ]
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,21 +80,38 @@ export default function Home() {
           </div>
           <h1 className={styles.title}>Startup Lens</h1>
           <p className={styles.subtitle}>
-          AI-powered search through Y Combinator&apos;s startup knowledge
+            AI-powered search through Y Combinator&apos;s startup knowledge
           </p>
         </header>
 
         <section className={styles.promptSection}>
-          <div className={styles.promptGrid}>
-            {suggestedPrompts.map((prompt, index) => (
-              <button
-                key={index}
-                onClick={() => setQuestion(prompt)}
-                className={styles.promptButton}
-              >
-                {prompt}
-              </button>
-            ))}
+          <div className={styles.carouselContainer}>
+            <div className={styles.carousel}>
+              {/* First row */}
+              <div className={styles.carouselRow}>
+                {[...allPrompts[0], ...allPrompts[0]].map((prompt, index) => (
+                  <button
+                    key={`row1-${index}`}
+                    onClick={() => setQuestion(prompt)}
+                    className={styles.promptButton}
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+              {/* Second row */}
+              <div className={styles.carouselRow}>
+                {[...allPrompts[1], ...allPrompts[1]].map((prompt, index) => (
+                  <button
+                    key={`row2-${index}`}
+                    onClick={() => setQuestion(prompt)}
+                    className={styles.promptButton}
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 

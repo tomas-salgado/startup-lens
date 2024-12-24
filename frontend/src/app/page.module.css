@@ -67,6 +67,7 @@
 .promptSection {
   text-align: center;
   margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .promptTitle {
@@ -83,16 +84,35 @@
 }
 
 .promptButton {
+  flex: 0 0 auto;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   font-size: 0.875rem;
   color: #374151;
   background-color: #f3f4f6;
+  white-space: nowrap;
   transition: background-color 0.2s;
+  height: 36px;
 }
 
 .promptButton:hover {
   background-color: #e5e7eb;
+}
+
+/* Add animation for prompts */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.promptButton {
+  animation: fadeIn 0.5s ease-out;
 }
 
 .inputForm {
@@ -307,4 +327,98 @@
     background: #f5f5f5;
     border-radius: 8px;
     margin: 1rem 0;
+}
+
+.carouselContainer {
+  width: 100%;
+  max-width: 42rem;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  height: 100px;
+}
+
+.carousel {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  height: 100%;
+}
+
+.carouselRow {
+  display: flex;
+  gap: 1rem;
+  height: 36px;
+  animation: scroll 100s linear infinite;
+}
+
+/* Make second row move in opposite direction */
+.carouselRow:nth-child(2) {
+  animation: scroll-reverse 100s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Pause animation on hover */
+.carousel:hover {
+  animation-play-state: paused;
+}
+
+/* Gradient fade effect */
+.carouselContainer::before,
+.carouselContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carouselContainer::before {
+  left: 0;
+  background: linear-gradient(to right, #f8fafc 20%, transparent);
+}
+
+.carouselContainer::after {
+  right: 0;
+  background: linear-gradient(to left, #f8fafc 20%, transparent);
+}
+
+.carouselRow {
+  display: flex;
+  gap: 1rem;
+  height: 36px; /* Match promptButton height */
+}
+
+/* Make second row move in opposite direction */
+.carouselRow:nth-child(2) {
+  /* Remove the different animation */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 } 
