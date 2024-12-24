@@ -12,6 +12,40 @@ interface VideoSource {
   timestampUrl: string;
 }
 
+// Add ShareButton component at the top level
+const ShareButton = ({ source }: { source: VideoSource }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    try {
+      // Create Startup Lens share URL with the full YouTube URL
+      const shareUrl = `${window.location.origin}/watch?url=${encodeURIComponent(source.timestampUrl)}&video=${encodeURIComponent(source.videoName)}&chapter=${encodeURIComponent(source.chapterName)}`;
+      
+      console.log('[DEBUG] Sharing:', {
+        originalUrl: source.timestampUrl,
+        shareUrl,
+        videoName: source.videoName,
+        chapterName: source.chapterName
+      });
+      
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleShare}
+      className={styles.shareButton}
+    >
+      {copied ? 'Copied!' : 'Share'}
+    </button>
+  );
+};
+
 export default function Home() {
   const [question, setQuestion] = useState('');
   const [sources, setSources] = useState<VideoSource[]>([]);
@@ -169,7 +203,10 @@ export default function Home() {
               >
                 <div className={styles.videoTitle}>
                   <div className={styles.videoName}>{source.videoName}</div>
-                  <div className={styles.chapterName}>{source.chapterName}</div>
+                  <div className={styles.titleRow}>
+                    <div className={styles.chapterName}>{source.chapterName}</div>
+                    <ShareButton source={source} />
+                  </div>
                 </div>
                 <iframe
                   width="100%"
