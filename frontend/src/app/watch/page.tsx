@@ -9,16 +9,17 @@ import Link from 'next/link';
 
 export default function WatchPage() {
   const searchParams = useSearchParams();
-  const videoUrl = searchParams.get('url');
-  const videoName = searchParams.get('video') || 'Video';
-  const chapterName = searchParams.get('chapter') || 'Chapter';
+  const videoId = searchParams.get('v');
+  const timestamp = searchParams.get('t') || '0';
+  const title = searchParams.get('title') || 'YC Startup Advice';
+  const chapter = searchParams.get('c') || 'Watch Video';
 
   useEffect(() => {
-    console.log('[PAGE_VIEW] Watch page loaded', { videoUrl, videoName, chapterName });
-  }, [videoUrl, videoName, chapterName]);
+    console.log('[PAGE_VIEW] Watch page loaded', { videoId, timestamp, title, chapter });
+  }, [videoId, timestamp, title, chapter]);
 
-  // If no video URL, show error
-  if (!videoUrl) {
+  // If no video ID, show error
+  if (!videoId) {
     return (
       <main className={styles.main}>
         <div className={styles.background} />
@@ -49,6 +50,8 @@ export default function WatchPage() {
     );
   }
 
+  const videoUrl = `https://www.youtube.com/embed/${videoId}?start=${timestamp}`;
+
   return (
     <main className={styles.main}>
       <div className={styles.background} />
@@ -73,17 +76,17 @@ export default function WatchPage() {
         <div className={styles.sourceVideos}>
           <div className={styles.videoContainer}>
             <div className={styles.videoTitle}>
-              <div className={styles.videoName}>{videoName}</div>
+              <div className={styles.videoName}>{decodeURIComponent(title)}</div>
               <div className={styles.titleRow}>
-                <div className={styles.chapterName}>{chapterName}</div>
+                <div className={styles.chapterName}>{decodeURIComponent(chapter)}</div>
               </div>
             </div>
             <iframe
               width="100%"
               height="315"
               src={videoUrl}
-              title={`${videoName} - ${chapterName}`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+              title="YC Startup Advice"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               loading="lazy"
             />
@@ -91,7 +94,7 @@ export default function WatchPage() {
         </div>
 
         <Link href="/" className={styles.backButton}>
-          Search for more startup advice →
+          Search more startup advice →
         </Link>
       </div>
       <div className={styles.disclaimer}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './page.module.css';
 import { SendIcon, ShareIcon } from './icons';
 import ycLogo from './img/yc-logo.png';
@@ -15,35 +15,114 @@ interface VideoSource {
 // Add ShareButton component at the top level
 const ShareButton = ({ source }: { source: VideoSource }) => {
   const [copied, setCopied] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleShare = async () => {
+  // Extract video ID and timestamp from YouTube URL
+  const getVideoParams = (url: string) => {
     try {
-      // Create Startup Lens share URL with the full YouTube URL
-      const shareUrl = `${window.location.origin}/watch?url=${encodeURIComponent(source.timestampUrl)}&video=${encodeURIComponent(source.videoName)}&chapter=${encodeURIComponent(source.chapterName)}`;
-      
-      console.log('[DEBUG] Sharing:', {
-        originalUrl: source.timestampUrl,
-        shareUrl,
-        videoName: source.videoName,
-        chapterName: source.chapterName
-      });
-      
+      const urlObj = new URL(url);
+      // Handle both embed and watch URLs
+      const path = urlObj.pathname;
+      let videoId = '';
+      let start = '0';
+
+      if (path.includes('/embed/')) {
+        // Format: youtube.com/embed/VIDEO_ID
+        videoId = path.split('/embed/')[1];
+      } else {
+        // Format: youtube.com/watch?v=VIDEO_ID
+        videoId = urlObj.searchParams.get('v') || '';
+      }
+
+      // Get timestamp from either 'start' or 't' parameter
+      start = urlObj.searchParams.get('start') || urlObj.searchParams.get('t') || '0';
+
+      console.log('[DEBUG] Extracted video params:', { url, videoId, start });
+      return { videoId, start };
+    } catch (err) {
+      console.error('Failed to parse URL:', err);
+      return { videoId: '', start: '0' };
+    }
+  };
+
+  // Create a shorter share URL
+  const createShareUrl = () => {
+    const { videoId, start } = getVideoParams(source.timestampUrl);
+    // Include a short version of the title for context
+    const shortTitle = encodeURIComponent(source.videoName.slice(0, 50));
+    const shortChapter = encodeURIComponent(source.chapterName.slice(0, 50));
+    return `${window.location.origin}/watch?v=${videoId}&t=${start}&title=${shortTitle}&c=${shortChapter}`;
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleCopyLink = async () => {
+    try {
+      const shareUrl = createShareUrl();
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      setIsOpen(false);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
   };
 
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        const shareUrl = createShareUrl();
+        await navigator.share({
+          title: source.videoName,
+          text: source.chapterName,
+          url: shareUrl,
+        });
+      } catch (err) {
+        console.error('Failed to share:', err);
+      }
+    }
+    setIsOpen(false);
+  };
+
   return (
-    <button
-      onClick={handleShare}
-      className={styles.shareButton}
-    >
-      <ShareIcon />
-      {copied ? 'Copied!' : 'Share Clip'}
-    </button>
+    <div className={styles.shareButtonContainer} ref={dropdownRef}>
+      <button
+        onClick={() => {
+          // If native sharing is not available, copy directly
+          if (!('share' in navigator)) {
+            handleCopyLink();
+          } else {
+            setIsOpen(!isOpen);
+          }
+        }}
+        className={styles.shareButton}
+      >
+        <ShareIcon />
+        {!('share' in navigator) && copied ? 'Copied!' : 'Share Clip'}
+      </button>
+      
+      {isOpen && 'share' in navigator && (
+        <div className={styles.shareDropdown}>
+          <button onClick={handleCopyLink} className={styles.shareOption}>
+            {copied ? 'Copied!' : 'Copy Link'}
+          </button>
+          <button onClick={handleNativeShare} className={styles.shareOption}>
+            Share...
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 

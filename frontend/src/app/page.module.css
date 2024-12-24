@@ -415,20 +415,6 @@
   height: 36px; /* Match promptButton height */
 }
 
-/* Make second row move in opposite direction */
-.carouselRow:nth-child(2) {
-  /* Remove the different animation */
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 /* Add these mobile-specific styles */
 @media (max-width: 768px) {
   .container {
@@ -557,4 +543,49 @@
 
 .watchHeader {
   margin-bottom: 0rem; 
+}
+
+.shareButtonContainer {
+  position: relative;
+}
+
+.shareDropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.25rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 140px;
+  z-index: 10;
+}
+
+.shareOption {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #374151;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.shareOption:hover {
+  background-color: #f3f4f6;
+}
+
+.shareOption:first-child {
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.shareOption:last-child {
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.shareOption + .shareOption {
+  border-top: 1px solid #e5e7eb;
 } 
