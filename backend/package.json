@@ -2,12 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "ts-node-dev --esm --respawn --transpile-only src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node --experimental-specifier-resolution=node dist/server.js",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,7 +15,7 @@
   "devDependencies": {
     "@types/node": "^22.10.2",
     "typescript": "^5.7.2",
-    "ts-node-dev": "^2.0.0"
+    "tsx": "^4.7.0"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
