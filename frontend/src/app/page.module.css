@@ -421,4 +421,79 @@
   100% {
     transform: translateX(-50%);
   }
+}
+
+/* Add these mobile-specific styles */
+@media (max-width: 768px) {
+  .container {
+    transform: none;  /* Remove the scale transform on mobile */
+    padding: 2rem 1rem;
+    max-width: 100%;
+  }
+
+  .sourceVideos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 0;
+  }
+
+  .videoContainer {
+    width: 100%;
+    margin: 0;
+  }
+
+  .videoContainer iframe {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* Fix carousel overflow */
+  .carouselContainer {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+  }
+
+  .promptButton {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .container {
+    flex: 1;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .disclaimer {
+    position: relative;
+    background: none;
+    border-top: none;
+    backdrop-filter: none;
+    padding: 1rem;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: auto;  /* Push to bottom */
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* Additional support for very small screens */
+@media (max-width: 375px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
 } 
