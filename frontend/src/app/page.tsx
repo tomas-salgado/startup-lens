@@ -36,7 +36,7 @@ export default function Home() {
     setSources([]);
 
     try {
-      const response = await fetch('http://localhost:3001/api/sources', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sources`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question }),
