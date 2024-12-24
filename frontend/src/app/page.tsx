@@ -159,8 +159,9 @@ export default function Home() {
                   height="315"
                   src={source.timestampUrl}
                   title={`${source.videoName} - ${source.chapterName}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
                   allowFullScreen
+                  loading="lazy"
                 />
               </div>
             ))}
