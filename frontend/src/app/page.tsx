@@ -141,6 +141,9 @@ export default function Home() {
           </div>
         )}
       </div>
+      <div className={styles.disclaimer}>
+        This is an unofficial tool not affiliated with Y Combinator. Y Combinator is a trademark of Y Combinator Management, LLC.
+      </div>
     </main>
   );
 }
