@@ -4,14 +4,12 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding: 0;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .container {
   max-width: 48rem;
   margin: 0 auto;
-  padding: 5rem 1rem 4rem;
+  padding: 5rem 1rem 6rem;
   transform: scale(1.1);
   transform-origin: top center;
   position: relative;
@@ -262,8 +260,8 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   padding: 1rem;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-height: none;
+  overflow-y: visible;
 }
 
 .videoCard {
