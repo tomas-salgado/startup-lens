@@ -111,6 +111,12 @@ export default function Home() {
           </div>
         )}
 
+        {!loading && !error && sources.length === 0 && question.trim() && (
+          <div className={styles.noResults}>
+            No relevant video clips found.
+          </div>
+        )}
+
         {sources.length > 0 && (
           <div className={styles.sourceVideos}>
             {sources.map((source, index) => (

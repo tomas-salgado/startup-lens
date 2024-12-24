@@ -67,18 +67,23 @@ export class PineconeService {
     async searchSimilar(embedding: number[]): Promise<VideoSearchResult[]> {
         const results = await this.index.query({
             vector: embedding,
-            topK: 5,
+            topK: 6,
             includeMetadata: true
         });
         
-        return results.matches.map((match: any) => ({
-            score: match.score,
-            videoName: match.metadata.videoName,
-            chapterName: match.metadata.chapterName,
-            text: match.metadata.text,
-            startTime: match.metadata.startTime,
-            endTime: match.metadata.endTime,
-            timestampUrl: match.metadata.timestampUrl
-        }));
+        // Filter by threshold
+        const SIMILARITY_THRESHOLD = 0.8;
+
+        return results.matches
+            .filter((match: any) => match.score >= SIMILARITY_THRESHOLD)
+            .map((match: any) => ({
+                score: match.score,
+                videoName: match.metadata.videoName,
+                chapterName: match.metadata.chapterName,
+                text: match.metadata.text,
+                startTime: match.metadata.startTime,
+                endTime: match.metadata.endTime,
+                timestampUrl: match.metadata.timestampUrl
+            }));
     }
 } 
