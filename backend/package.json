@@ -2,8 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/server.ts",
   "scripts": {
+    "dev": "ts-node-dev --esm --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node --experimental-specifier-resolution=node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,12 +15,14 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.10.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "ts-node-dev": "^2.0.0"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "cors": "^2.8.5",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "dotenv": "^16.3.1"
   }
 }
