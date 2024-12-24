@@ -85,7 +85,7 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
         const shareUrl = createShareUrl();
         await navigator.share({
           title: "Startup Lens: " + source.videoName,
-          text: `Watch "${source.chapterName}" from ${source.videoName} on Startup Lens - AI-powered search through Y Combinator's startup knowledge.`,
+          text: `"${source.chapterName}" - YC startup advice`,
           url: shareUrl,
         });
       } catch (err) {
