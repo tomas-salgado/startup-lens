@@ -25,6 +25,18 @@ interface VideoSearchResult {
     timestampUrl: string;
 }
 
+function decodeHtmlString(html: string) {
+    return html
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&ldquo;/g, '"')
+        .replace(/&rdquo;/g, '"')
+        .replace(/&#x27;/g, "'");
+}
+
 export class PineconeService {
     private client: Pinecone;
     private index: any;
@@ -78,9 +90,9 @@ export class PineconeService {
             .filter((match: any) => match.score >= SIMILARITY_THRESHOLD)
             .map((match: any) => ({
                 score: match.score,
-                videoName: match.metadata.videoName,
-                chapterName: match.metadata.chapterName,
-                text: match.metadata.text,
+                videoName: decodeHtmlString(match.metadata.videoName),
+                chapterName: decodeHtmlString(match.metadata.chapterName),
+                text: decodeHtmlString(match.metadata.text),
                 startTime: match.metadata.startTime,
                 endTime: match.metadata.endTime,
                 timestampUrl: match.metadata.timestampUrl
