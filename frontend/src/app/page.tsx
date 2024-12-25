@@ -72,9 +72,15 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
     try {
       const shareUrl = createShareUrl();
       await navigator.clipboard.writeText(shareUrl);
-      toast.success('Link copied to clipboard!');
+      toast.success('Link copied to clipboard!', {
+        duration: 5000,
+        style: {
+          background: '#22c55e',
+          color: '#fff',
+        },
+      });
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 5000);
       setIsOpen(false);
     } catch (err) {
       console.error('Failed to copy:', err);
