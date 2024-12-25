@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 import { SendIcon, ShareIcon } from './icons';
 import Logo from '../../components/Logo';
+import toast from 'react-hot-toast';
 
 interface VideoSource {
   videoName: string;
@@ -71,11 +72,13 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
     try {
       const shareUrl = createShareUrl();
       await navigator.clipboard.writeText(shareUrl);
+      toast.success('Link copied to clipboard!');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
       setIsOpen(false);
     } catch (err) {
       console.error('Failed to copy:', err);
+      toast.error('Failed to copy link');
     }
   };
 
