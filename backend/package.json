@@ -14,19 +14,20 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.10.5",
-    "typescript": "^5.3.3",
-    "tsx": "^4.7.0"
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@pinecone-database/pinecone": "^4.0.0",
+    "@types/axios": "^0.14.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "dotenv": "^16.4.7",
-    "openai": "^4.77.0",
-    "@pinecone-database/pinecone": "^4.0.0",
-    "html-entities": "^2.5.2",
     "axios": "^1.7.9",
-    "@types/axios": "^0.14.4"
+    "cohere-ai": "^7.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "html-entities": "^2.5.2",
+    "openai": "^4.77.0"
   }
 }

@@ -15,7 +15,7 @@ interface VideoEmbedding {
     };
 }
 
-interface VideoSearchResult {
+export interface VideoSearchResult {
     score: number;
     videoName: string;
     chapterName: string;
@@ -79,7 +79,7 @@ export class PineconeService {
     async searchSimilar(embedding: number[]): Promise<VideoSearchResult[]> {
         const results = await this.index.query({
             vector: embedding,
-            topK: 6,
+            topK: 10,
             includeMetadata: true
         });
         
