@@ -28,6 +28,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "html-entities": "^2.5.2",
-    "openai": "^4.77.0"
+    "openai": "^4.77.0",
+    "quick-lru": "^7.0.0"
   }
 }
