@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 import { SendIcon, ShareIcon } from './icons';
@@ -129,7 +129,8 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
   );
 };
 
-export default function Home() {
+// Create a new client component for the search functionality
+function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -213,119 +214,130 @@ export default function Home() {
   }, []);
 
   return (
+    <>
+      <header className={styles.header}>
+        <div className={styles.iconWrapper}>
+          <Logo width={40} height={40} color="#FF6B3D" />
+        </div>
+        <h1 className={styles.title}>Startup Lens</h1>
+        <p className={styles.subtitle}>
+          AI-powered search through Y Combinator&apos;s startup knowledge
+        </p>
+      </header>
+
+      <section className={styles.promptSection}>
+        <div className={styles.carouselContainer}>
+          <div className={styles.carousel}>
+            {/* First row */}
+            <div className={styles.carouselRow}>
+              {[...allPrompts[0], ...allPrompts[0]].map((prompt, index) => (
+                <button
+                  key={`row1-${index}`}
+                  onClick={() => {
+                    console.log(`[PROMPT_CLICK] User clicked example: "${prompt}"`);
+                    setQuestion(prompt);
+                  }}
+                  className={styles.promptButton}
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+            {/* Second row */}
+            <div className={styles.carouselRow}>
+              {[...allPrompts[1], ...allPrompts[1]].map((prompt, index) => (
+                <button
+                  key={`row2-${index}`}
+                  onClick={() => setQuestion(prompt)}
+                  className={styles.promptButton}
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <form onSubmit={handleSubmit} className={styles.inputForm}>
+        <div className={styles.inputWrapper}>
+          <input
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask a question..."
+            className={styles.input}
+            disabled={loading}
+          />
+          <button
+            type="submit"
+            disabled={loading || !question.trim()}
+            className={styles.sendButton}
+          >
+            <SendIcon />
+          </button>
+        </div>
+      </form>
+
+      {error && (
+        <div className={styles.error}>
+          {error}
+        </div>
+      )}
+
+      {!loading && !error && hasSearched && sources.length === 0 && (
+        <div className={styles.noResults}>
+          No relevant video clips found.
+        </div>
+      )}
+
+      {sources.length > 0 && (
+        <div className={styles.sourceVideos} ref={resultsRef}>
+          <div className={styles.searchQuery}>
+            <span className={styles.searchQueryText}>Results for</span>
+            &ldquo;{searchParams.get('q')}&rdquo;
+          </div>
+          {sources.map((source, index) => (
+            <div 
+              key={index} 
+              className={styles.videoContainer}
+              onClick={() => console.log(`[VIDEO_INTERACTION] User interacted with: "${source.videoName}" - ${source.chapterName}`)}
+              onLoad={() => console.log(`[VIDEO_LOAD] Loaded video: "${source.videoName}" - ${source.chapterName}`)}
+            >
+              <div className={styles.videoTitle}>
+                <div className={styles.videoName}>{source.videoName}</div>
+                <div className={styles.titleRow}>
+                  <div className={styles.chapterName}>{source.chapterName}</div>
+                  <ShareButton source={source} />
+                </div>
+              </div>
+              <iframe
+                width="100%"
+                height="315"
+                src={source.timestampUrl}
+                title={`${source.videoName} - ${source.chapterName}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+                allowFullScreen
+                loading="lazy"
+                onClick={() => console.log(`[VIDEO_CLICK] User clicked video: "${source.videoName}" - ${source.chapterName}`)}
+                onPlay={() => console.log(`[VIDEO_PLAY] User started playing: "${source.videoName}" - ${source.chapterName}`)}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+// Update the main Home component
+export default function Home() {
+  return (
     <main className={styles.main}>
       <div className={styles.background} />
       <div className={styles.container}>
-        <header className={styles.header}>
-          <div className={styles.iconWrapper}>
-            <Logo width={40} height={40} color="#FF6B3D" />
-          </div>
-          <h1 className={styles.title}>Startup Lens</h1>
-          <p className={styles.subtitle}>
-            AI-powered search through Y Combinator&apos;s startup knowledge
-          </p>
-        </header>
-
-        <section className={styles.promptSection}>
-          <div className={styles.carouselContainer}>
-            <div className={styles.carousel}>
-              {/* First row */}
-              <div className={styles.carouselRow}>
-                {[...allPrompts[0], ...allPrompts[0]].map((prompt, index) => (
-                  <button
-                    key={`row1-${index}`}
-                    onClick={() => {
-                      console.log(`[PROMPT_CLICK] User clicked example: "${prompt}"`);
-                      setQuestion(prompt);
-                    }}
-                    className={styles.promptButton}
-                  >
-                    {prompt}
-                  </button>
-                ))}
-              </div>
-              {/* Second row */}
-              <div className={styles.carouselRow}>
-                {[...allPrompts[1], ...allPrompts[1]].map((prompt, index) => (
-                  <button
-                    key={`row2-${index}`}
-                    onClick={() => setQuestion(prompt)}
-                    className={styles.promptButton}
-                  >
-                    {prompt}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <form onSubmit={handleSubmit} className={styles.inputForm}>
-          <div className={styles.inputWrapper}>
-            <input
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Ask a question..."
-              className={styles.input}
-              disabled={loading}
-            />
-            <button
-              type="submit"
-              disabled={loading || !question.trim()}
-              className={styles.sendButton}
-            >
-              <SendIcon />
-            </button>
-          </div>
-        </form>
-
-        {error && (
-          <div className={styles.error}>
-            {error}
-          </div>
-        )}
-
-        {!loading && !error && hasSearched && sources.length === 0 && (
-          <div className={styles.noResults}>
-            No relevant video clips found.
-          </div>
-        )}
-
-        {sources.length > 0 && (
-          <div className={styles.sourceVideos} ref={resultsRef}>
-            <div className={styles.searchQuery}>
-              <span className={styles.searchQueryText}>Results for</span>
-              &ldquo;{searchParams.get('q')}&rdquo;
-            </div>
-            {sources.map((source, index) => (
-              <div 
-                key={index} 
-                className={styles.videoContainer}
-                onClick={() => console.log(`[VIDEO_INTERACTION] User interacted with: "${source.videoName}" - ${source.chapterName}`)}
-                onLoad={() => console.log(`[VIDEO_LOAD] Loaded video: "${source.videoName}" - ${source.chapterName}`)}
-              >
-                <div className={styles.videoTitle}>
-                  <div className={styles.videoName}>{source.videoName}</div>
-                  <div className={styles.titleRow}>
-                    <div className={styles.chapterName}>{source.chapterName}</div>
-                    <ShareButton source={source} />
-                  </div>
-                </div>
-                <iframe
-                  width="100%"
-                  height="315"
-                  src={source.timestampUrl}
-                  title={`${source.videoName} - ${source.chapterName}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-                  allowFullScreen
-                  loading="lazy"
-                  onClick={() => console.log(`[VIDEO_CLICK] User clicked video: "${source.videoName}" - ${source.chapterName}`)}
-                  onPlay={() => console.log(`[VIDEO_PLAY] User started playing: "${source.videoName}" - ${source.chapterName}`)}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+        <Suspense fallback={<div>Loading...</div>}>
+          <SearchContent />
+        </Suspense>
       </div>
       <div className={styles.disclaimer}>
         This is an unofficial tool not affiliated with Y Combinator. Y Combinator is a trademark of Y Combinator Management, LLC.
