@@ -1,10 +1,45 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, Suspense } from 'react';
+import { useEffect, Suspense, useState } from 'react';
 import styles from '../page.module.css';
 import Logo from '../../../components/Logo';
 import Link from 'next/link';
+import { ShareIcon } from '../icons';
+import toast from 'react-hot-toast';
+
+function ShareButton({ videoId, timestamp, title, chapter }: { videoId: string, timestamp: string, title: string, chapter: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const createShareUrl = () => {
+    const shortTitle = encodeURIComponent(title.slice(0, 50));
+    const shortChapter = encodeURIComponent(chapter.slice(0, 50));
+    return `${window.location.origin}/watch?v=${videoId}&t=${timestamp}&title=${shortTitle}&c=${shortChapter}`;
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      const shareUrl = createShareUrl();
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success('Link copied to clipboard!');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      toast.error('Failed to copy link');
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopyLink}
+      className={styles.shareButton}
+    >
+      <ShareIcon />
+      {copied ? 'Copied!' : 'Share Clip'}
+    </button>
+  );
+}
 
 function WatchContent() {
   const searchParams = useSearchParams();
@@ -64,6 +99,7 @@ function WatchContent() {
               <div className={styles.videoName}>{decodeURIComponent(title)}</div>
               <div className={styles.titleRow}>
                 <div className={styles.chapterName}>{decodeURIComponent(chapter)}</div>
+                <ShareButton videoId={videoId} timestamp={timestamp} title={title} chapter={chapter} />
               </div>
             </div>
             <iframe
