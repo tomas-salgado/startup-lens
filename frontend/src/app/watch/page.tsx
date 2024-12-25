@@ -79,7 +79,7 @@ function WatchContent() {
         </div>
 
         <Link href="/" className={styles.backButton}>
-          Search more startup advice →
+          Search for more startup advice →
         </Link>
       </div>
       <div className={styles.disclaimer}>
