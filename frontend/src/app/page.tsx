@@ -177,6 +177,7 @@ export default function Home() {
       console.log(`[RESULTS] Found ${data.length} videos for query: "${question}"`);
       
       setSources(data);
+      setQuestion(''); // Clear the search bar after getting results
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to get sources');
       console.error(`[ERROR] Search failed for query: "${question}"`, err);
