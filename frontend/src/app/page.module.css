@@ -195,8 +195,8 @@
 .disclaimer {
   text-align: center;
   color: #6b7280;
-  font-size: 0.875rem;
-  padding: 1.5rem;
+  font-size: 0.75rem;
+  padding: 1rem;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -474,10 +474,10 @@
     background: none;
     border-top: none;
     backdrop-filter: none;
-    padding: 1rem;
-    font-size: 0.75rem;
+    padding: 0.75rem;
+    font-size: 0.675rem;
     color: #9ca3af;
-    margin-top: auto;  /* Push to bottom */
+    margin-top: auto;
     text-align: center;
     width: 100%;
   }
