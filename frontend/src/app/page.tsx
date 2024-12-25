@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 import { SendIcon, ShareIcon } from './icons';
 import Logo from '../../components/Logo';
@@ -126,7 +127,10 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
 };
 
 export default function Home() {
-  const [question, setQuestion] = useState('');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const [question, setQuestion] = useState(searchParams.get('q') || '');
   const [sources, setSources] = useState<VideoSource[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -153,11 +157,15 @@ export default function Home() {
     console.log('[PAGE_VIEW] Home page loaded');
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
     
     console.log(`[SEARCH] Query: "${question}"`);
+    
+    // Update URL with search query
+    const newUrl = `${window.location.pathname}?q=${encodeURIComponent(question)}`;
+    router.push(newUrl);
     
     setLoading(true);
     setError('');
@@ -178,13 +186,28 @@ export default function Home() {
       
       setSources(data);
       setQuestion(''); // Clear the search bar after getting results
+
+      // Scroll to results after they're loaded
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to get sources');
       console.error(`[ERROR] Search failed for query: "${question}"`, err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [question, router]);
+
+  // Load initial search results if query parameter exists
+  useEffect(() => {
+    const initialQuery = searchParams.get('q');
+    if (initialQuery) {
+      setQuestion(initialQuery);
+      const syntheticEvent = { preventDefault: () => {} } as React.FormEvent;
+      handleSubmit(syntheticEvent);
+    }
+  }, []);
 
   return (
     <main className={styles.main}>
@@ -266,7 +289,11 @@ export default function Home() {
         )}
 
         {sources.length > 0 && (
-          <div className={styles.sourceVideos}>
+          <div className={styles.sourceVideos} ref={resultsRef}>
+            <div className={styles.searchQuery}>
+              <span className={styles.searchQueryText}>Results for</span>
+              &ldquo;{searchParams.get('q')}&rdquo;
+            </div>
             {sources.map((source, index) => (
               <div 
                 key={index} 
