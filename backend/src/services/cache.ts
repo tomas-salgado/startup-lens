@@ -1,4 +1,4 @@
-import QuickLRU from 'quick-lru';
+import { LRUCache } from 'lru-cache';
 
 interface CacheOptions {
     maxSize?: number;  // Maximum number of items to store
@@ -6,50 +6,25 @@ interface CacheOptions {
 }
 
 export class CacheService {
-    private cache: QuickLRU<string, any>;
-    private maxAge: number;
+    private cache: LRUCache<string, any>;
 
     constructor(options: CacheOptions = {}) {
-        this.maxAge = options.maxAge || 1000 * 60 * 60; // Default: 1 hour
-        this.cache = new QuickLRU({
-            maxSize: options.maxSize || 500, // Default: 500 items
+        this.cache = new LRUCache({
+            max: options.maxSize || 500, // Default: 500 items
+            ttl: options.maxAge || 1000 * 60 * 60, // Default: 1 hour
         });
-    }
-
-    private isExpired(timestamp: number): boolean {
-        return Date.now() - timestamp > this.maxAge;
     }
 
     get<T>(key: string): T | undefined {
-        const item = this.cache.get(key);
-        if (!item) return undefined;
-
-        const { value, timestamp } = item;
-        if (this.isExpired(timestamp)) {
-            this.cache.delete(key);
-            return undefined;
-        }
-
-        return value as T;
+        return this.cache.get(key) as T | undefined;
     }
 
     set(key: string, value: any): void {
-        this.cache.set(key, {
-            value,
-            timestamp: Date.now(),
-        });
+        this.cache.set(key, value);
     }
 
     has(key: string): boolean {
-        const item = this.cache.get(key);
-        if (!item) return false;
-        
-        if (this.isExpired(item.timestamp)) {
-            this.cache.delete(key);
-            return false;
-        }
-
-        return true;
+        return this.cache.has(key);
     }
 
     delete(key: string): void {
@@ -64,7 +39,7 @@ export class CacheService {
     getStats() {
         return {
             size: this.cache.size,
-            maxSize: this.cache.maxSize,
+            maxSize: this.cache.max,
         };
     }
 } 
