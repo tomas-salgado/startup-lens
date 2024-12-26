@@ -189,7 +189,7 @@ function SearchContent() {
         </div>
       )}
 
-      {sources.length > 0 && (
+      {sources.length > 0 && searchParams.get('q') && (
         <div className={styles.sourceVideos} ref={resultsRef}>
           <div className={styles.searchQuery}>
             <span className={styles.searchQueryText}>Results for</span>
