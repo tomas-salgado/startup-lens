@@ -39,8 +39,6 @@ const ShareButton = ({ source }: { source: VideoSource }) => {
 
       // Get timestamp from either 'start' or 't' parameter
       start = urlObj.searchParams.get('start') || urlObj.searchParams.get('t') || '0';
-
-      console.log('[DEBUG] Extracted video params:', { url, videoId, start });
       return { videoId, start };
     } catch (err) {
       console.error('Failed to parse URL:', err);
@@ -164,16 +162,10 @@ function SearchContent() {
     ]
   ];
 
-  useEffect(() => {
-    console.log('[PAGE_VIEW] Home page loaded');
-  }, []);
-
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
-    
-    console.log(`[SEARCH] Query: "${question}"`);
-    
+        
     // Update URL with search query
     const newUrl = `${window.location.pathname}?q=${encodeURIComponent(question)}`;
     router.push(newUrl);
@@ -192,9 +184,7 @@ function SearchContent() {
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Something went wrong');
-      
-      console.log(`[RESULTS] Found ${data.length} videos for query: "${question}"`);
-      
+            
       setSources(data);
       setQuestion(''); // Clear the search bar after getting results
 
@@ -241,7 +231,6 @@ function SearchContent() {
                 <button
                   key={`row1-${index}`}
                   onClick={() => {
-                    console.log(`[PROMPT_CLICK] User clicked example: "${prompt}"`);
                     setQuestion(prompt);
                   }}
                   className={styles.promptButton}
@@ -307,8 +296,6 @@ function SearchContent() {
             <div 
               key={index} 
               className={styles.videoContainer}
-              onClick={() => console.log(`[VIDEO_INTERACTION] User interacted with: "${source.videoName}" - ${source.chapterName}`)}
-              onLoad={() => console.log(`[VIDEO_LOAD] Loaded video: "${source.videoName}" - ${source.chapterName}`)}
             >
               <div className={styles.videoTitle}>
                 <div className={styles.videoName}>{source.videoName}</div>
@@ -325,8 +312,6 @@ function SearchContent() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
                 allowFullScreen
                 loading="lazy"
-                onClick={() => console.log(`[VIDEO_CLICK] User clicked video: "${source.videoName}" - ${source.chapterName}`)}
-                onPlay={() => console.log(`[VIDEO_PLAY] User started playing: "${source.videoName}" - ${source.chapterName}`)}
               />
             </div>
           ))}
