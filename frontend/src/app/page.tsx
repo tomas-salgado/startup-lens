@@ -189,7 +189,7 @@ function SearchContent() {
                 height="315"
                 src={source.timestampUrl}
                 title={`${source.videoName} - ${source.chapterName}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope"
                 allowFullScreen
                 loading="lazy"
               />
