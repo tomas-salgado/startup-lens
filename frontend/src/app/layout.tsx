@@ -46,7 +46,6 @@ export default function RootLayout({
               borderRadius: '8px',
               fontSize: '14px',
               maxWidth: '350px',
-              border: '1px solid #e5e7eb',
             },
             success: {
               iconTheme: {
