@@ -208,6 +208,17 @@
   letter-spacing: 0.02em;
 }
 
+@media (max-width: 768px) {
+  .disclaimer {
+    position: relative;
+    background-color: transparent;
+    backdrop-filter: none;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+  }
+}
+
 .githubLink {
   color: #4b5563;
   text-decoration: none;
@@ -483,19 +494,12 @@
   }
 
   .disclaimer {
-    text-align: center;
-    color: #6b7280;
-    font-size: 0.75rem;
-    padding: 0.75rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(248, 250, 252, 0.9);
-    backdrop-filter: blur(8px);
+    position: relative;
+    background-color: transparent;
+    backdrop-filter: none;
     border-top: 1px solid #e5e7eb;
-    z-index: 100;
-    letter-spacing: 0.02em;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
   }
   
   .githubLink {

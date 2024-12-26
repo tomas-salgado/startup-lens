@@ -347,7 +347,7 @@ export default function Home() {
       </div>
       <footer className={styles.disclaimer}>
         Built by <a href="https://github.com/tomas-salgado" target="_blank" rel="noopener noreferrer" className={styles.githubLink}>Tomas</a> • 
-        Not affiliated with or endorsed by Y Combinator
+        Not affiliated with or endorsed by YC
       </footer>
     </main>
   );
