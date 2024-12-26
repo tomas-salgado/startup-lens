@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: 'Startup Lens',
       description: 'AI-powered search through Y Combinator\'s startup knowledge',
       type: 'video.other',
-      url: 'https://startuplens.com',
+      url: 'https://startuplens.app',
     },
     twitter: {
       card: 'summary_large_image',
