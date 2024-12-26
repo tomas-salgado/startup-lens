@@ -7,6 +7,7 @@ import Logo from '../../../components/Logo';
 import Link from 'next/link';
 import { ShareIcon } from '../icons';
 import toast from 'react-hot-toast';
+import Disclaimer from '../../components/Disclaimer';
 
 function ShareButton({ videoId, timestamp, title, chapter }: { videoId: string, timestamp: string, title: string, chapter: string }) {
   const [copied, setCopied] = useState(false);
@@ -118,9 +119,7 @@ function WatchContent() {
           Search for more startup advice →
         </Link>
       </div>
-      <div className={styles.disclaimer}>
-        This is an unofficial tool not affiliated with Y Combinator. Y Combinator is a trademark of Y Combinator Management, LLC.
-      </div>
+      <Disclaimer />
     </main>
   );
 }

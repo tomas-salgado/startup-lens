@@ -6,6 +6,7 @@ import styles from './page.module.css';
 import { SendIcon, ShareIcon } from './icons';
 import Logo from '../../components/Logo';
 import toast from 'react-hot-toast';
+import Disclaimer from '../components/Disclaimer';
 
 interface VideoSource {
   videoName: string;
@@ -345,10 +346,7 @@ export default function Home() {
           <SearchContent />
         </Suspense>
       </div>
-      <footer className={styles.disclaimer}>
-        Built by <a href="https://github.com/tomas-salgado" target="_blank" rel="noopener noreferrer" className={styles.githubLink}>Tomas</a> • 
-        Not affiliated with or endorsed by YC
-      </footer>
+      <Disclaimer />
     </main>
   );
 }
