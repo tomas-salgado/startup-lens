@@ -32,6 +32,7 @@ function SearchContent() {
       "Should I build a startup in college?",
       "How to validate ideas fast?",
       "How do you balance work and life?",
+      "When to pivot my startup?",
     ],
     [
       "Tell me about AirBnB's early days",
@@ -39,8 +40,30 @@ function SearchContent() {
       "Remote team tips",
       "Should I build an AI startup?",
       "Explain the different funding rounds",
+      "Product-market fit",
+      "Should I work in big tech before a startup?"
     ]
   ];
+
+  const [shuffledPrompts, setShuffledPrompts] = useState(allPrompts);
+
+  // Fisher-Yates shuffle algorithm
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Shuffle prompts on client-side only
+  useEffect(() => {
+    setShuffledPrompts([
+      shuffleArray(allPrompts[0]),
+      shuffleArray(allPrompts[1])
+    ]);
+  }, []);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +130,7 @@ function SearchContent() {
           <div className={styles.carousel}>
             {/* First row */}
             <div className={styles.carouselRow}>
-              {[...allPrompts[0], ...allPrompts[0]].map((prompt, index) => (
+              {[...shuffledPrompts[0], ...shuffledPrompts[0]].map((prompt, index) => (
                 <button
                   key={`row1-${index}`}
                   onClick={() => {
@@ -121,7 +144,7 @@ function SearchContent() {
             </div>
             {/* Second row */}
             <div className={styles.carouselRow}>
-              {[...allPrompts[1], ...allPrompts[1]].map((prompt, index) => (
+              {[...shuffledPrompts[1], ...shuffledPrompts[1]].map((prompt, index) => (
                 <button
                   key={`row2-${index}`}
                   onClick={() => setQuestion(prompt)}
