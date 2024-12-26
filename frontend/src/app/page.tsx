@@ -345,9 +345,10 @@ export default function Home() {
           <SearchContent />
         </Suspense>
       </div>
-      <div className={styles.disclaimer}>
-        This is an unofficial tool not affiliated with Y Combinator. Y Combinator is a trademark of Y Combinator Management, LLC.
-      </div>
+      <footer className={styles.disclaimer}>
+        Built by <a href="https://github.com/tomas-salgado" target="_blank" rel="noopener noreferrer" className={styles.githubLink}>Tomas</a> • 
+        Not affiliated with or endorsed by Y Combinator
+      </footer>
     </main>
   );
 }

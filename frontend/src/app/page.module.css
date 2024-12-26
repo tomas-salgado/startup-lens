@@ -196,15 +196,28 @@
   text-align: center;
   color: #6b7280;
   font-size: 0.75rem;
-  padding: 1rem;
+  padding: 0.75rem;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(248, 250, 252, 0.95);
-  backdrop-filter: blur(5px);
+  background-color: rgba(248, 250, 252, 0.9);
+  backdrop-filter: blur(8px);
   border-top: 1px solid #e5e7eb;
   z-index: 100;
+  letter-spacing: 0.02em;
+}
+
+.githubLink {
+  color: #4b5563;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  padding: 0 0.15rem;
+}
+
+.githubLink:hover {
+  color: #FF6B3D;
 }
 
 .sourceVideos {
@@ -470,16 +483,31 @@
   }
 
   .disclaimer {
-    position: relative;
-    background: none;
-    border-top: none;
-    backdrop-filter: none;
-    padding: 0.75rem;
-    font-size: 0.675rem;
-    color: #9ca3af;
-    margin-top: auto;
     text-align: center;
-    width: 100%;
+    color: #6b7280;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(248, 250, 252, 0.9);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid #e5e7eb;
+    z-index: 100;
+    letter-spacing: 0.02em;
+  }
+  
+  .githubLink {
+    color: #4b5563;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 0 0.15rem;
+  }
+  
+  .githubLink:hover {
+    color: #FF6B3D;
   }
 }
 
