@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Startup Lens - Watch',
-    description: 'Search and learn from Y Combinator\'s video content',
+    title: 'Startup Lens',
+    description: 'AI-powered search through Y Combinator\'s startup knowledge',
     openGraph: {
-      title: 'Startup Lens - Watch',
-      description: 'Search and learn from Y Combinator\'s video content',
+      title: 'Startup Lens',
+      description: 'AI-powered search through Y Combinator\'s startup knowledge',
       type: 'video.other',
       url: 'https://startuplens.com',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Startup Lens - Watch',
-      description: 'Search and learn from Y Combinator\'s video content',
+      title: 'Startup Lens',
+      description: 'AI-powered search through Y Combinator\'s startup knowledge',
     },
   }
 }

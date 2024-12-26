@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Startup Lens",
-  description: "Search and learn from Y Combinator's video content",
+  description: "AI-powered search through Y Combinator's startup knowledge",
 };
 
 export default function RootLayout({
