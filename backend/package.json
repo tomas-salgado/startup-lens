@@ -18,6 +18,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.33.1",
     "@pinecone-database/pinecone": "^4.0.0",
     "@types/axios": "^0.14.4",
     "@types/cors": "^2.8.17",
@@ -29,6 +30,7 @@
     "express": "^4.21.2",
     "html-entities": "^2.5.2",
     "lru-cache": "^10.1.0",
-    "openai": "^4.77.0"
+    "openai": "^4.77.0",
+    "p-limit": "^6.2.0"
   }
 }

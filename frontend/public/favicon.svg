@@ -1,1 +1,8 @@
- 
+<svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" stroke="#FF6B4A" strokeWidth="6" />
+  <circle cx="50" cy="50" r="5" fill="#FF6B4A" />
+  <path d="M50 15L55 45L50 50L45 45L50 15Z" fill="#FF6B4A" transform="rotate(0, 50, 50)" />
+  <path d="M50 15L55 45L50 50L45 45L50 15Z" fill="#FF6B4A" transform="rotate(90, 50, 50)" />
+  <path d="M50 15L55 45L50 50L45 45L50 15Z" fill="#FF6B4A" transform="rotate(180, 50, 50)" />
+  <path d="M50 15L55 45L50 50L45 45L50 15Z" fill="#FF6B4A" transform="rotate(270, 50, 50)" />
+</svg> 
