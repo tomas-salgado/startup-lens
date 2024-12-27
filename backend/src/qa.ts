@@ -19,7 +19,8 @@ export class QAService {
             chapterName: result.chapterName,
             score: result.score,
             timestampUrl: result.timestampUrl,
-            text: result.text
+            text: result.text,
+            relevantQuestions: result.relevantQuestions || []
         }));
     }
 } 

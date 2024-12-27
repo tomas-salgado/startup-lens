@@ -12,6 +12,7 @@ interface VideoEmbedding {
         endTime: string;
         duration: number;
         timestampUrl: string;
+        relevantQuestions?: string[];
     };
 }
 
@@ -23,6 +24,7 @@ export interface VideoSearchResult {
     startTime: string;
     endTime: string;
     timestampUrl: string;
+    relevantQuestions?: string[];
 }
 
 function decodeHtmlString(html: string) {
@@ -95,7 +97,8 @@ export class PineconeService {
                 text: decodeHtmlString(match.metadata.text),
                 startTime: match.metadata.startTime,
                 endTime: match.metadata.endTime,
-                timestampUrl: match.metadata.timestampUrl
+                timestampUrl: match.metadata.timestampUrl,
+                relevantQuestions: match.metadata.relevantQuestions || []
             }));
     }
 } 
