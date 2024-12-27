@@ -1,4 +1,4 @@
-# <img src="frontend/public/logo.svg" width="40" height="40" align="center" alt="StartupLens Logo">&nbsp;&nbsp;StartupLens - AI-powered search for startup advice 🔎
+# <img src="frontend/public/logo.svg" width="40" height="40" align="center" alt="StartupLens Logo">&nbsp;&nbsp;StartupLens - AI-powered search for startup advice
 
 Get advice from Y Combinator videos instantly. Ask a question, and we'll show you the exact video moments with the answers.
 
