@@ -1,24 +1,24 @@
-# Startup Lens
+# <img src="frontend/public/logo.svg" width="40" height="40" align="center" alt="StartupLens Logo">&nbsp;&nbsp;StartupLens - AI-powered search for startup knowledge 🔎
 
 Get advice from Y Combinator videos instantly. Ask a question, and we'll show you the exact video moments with the answers.
 
 ![StartupLens Screenshot](frontend/public/app-screenshot.png)
 
-## Overview
+## 📖 Overview
 
-Startup Lens makes Y Combinator's vast video knowledge base searchable at a granular level. By processing over 500 YC videos and indexing each segment, the platform can point you to the exact moment in a video that answers your question. No more scrubbing through hour-long videos - just ask your question and get taken directly to the relevant clip.
+StartupLens makes Y Combinator's vast video knowledge base searchable at a granular level. By processing over 500 YC videos and indexing each segment, the platform can point you to the exact moment in a video that answers your question. No more scrubbing through hour-long videos - just ask your question and get taken directly to the relevant clip.
 
-### Key Features
+## ✨ Key Features
 
-- **Precise Video Clips**: Get the exact moments in videos that answer your question, not entire videos
-- **Rich Knowledge Base**: Search across 500+ Y Combinator startup videos
-- **Smart Search**: Natural language search powered by vector similarity and Cohere's reranking
-- **Instant Follow-up**: Each clip comes with relevant follow-up questions to dive deeper
-- **Easy Sharing**: Share specific video clips with timestamps with your team
+- 🎯 **Precise Video Clips**: Get the exact moments in videos that answer your question, not entire videos
+- 📚 **Rich Knowledge Base**: Search across 500+ Y Combinator startup videos
+- 🔍 **Smart Search**: Natural language search powered by vector similarity and Cohere's reranking
+- 💡 **Instant Follow-up**: Each clip comes with relevant follow-up questions to dive deeper
+- 🔗 **Easy Sharing**: Share specific video clips with timestamps with your team
 
-## Technical Architecture
+## 🛠️ Technical Architecture
 
-### RAG System Implementation
+### 🧩 RAG System Implementation
 
 The core of StartupLens uses Retrieval Augmented Generation (RAG) to find the most relevant video clips:
 
@@ -48,7 +48,7 @@ The core of StartupLens uses Retrieval Augmented Generation (RAG) to find the mo
 [User Query] → [Vector Embedding] → [Pinecone Search] → [Cohere Rerank] → [Clip Results]
 ```
 
-## Technologies Used
+## 💻 Technologies Used
 
 - Next.js for the frontend
 - Node.js and Express for the backend
@@ -56,9 +56,9 @@ The core of StartupLens uses Retrieval Augmented Generation (RAG) to find the mo
 - Cohere for reranking results
 - TypeScript
 
-## Local Development Setup
+## ⚙️ Local Development Setup
 
-### Prerequisites
+### 📋 Prerequisites
 
 - Node.js (v18 or higher)
 - npm
@@ -102,7 +102,7 @@ npm run dev
 
 The backend API will be available at [http://localhost:3001](http://localhost:3001)
 
-### Configuration
+### Configuration 
 
 #### Frontend Configuration
 Create a `.env.local` file in the frontend directory with the following variables:
@@ -120,6 +120,6 @@ COHERE_API_KEY=your_cohere_api_key
 ANTHROPIC_API_KEY=your_anthropic_api_key
 ```
 
-## License
+## 📄 License 
 
 MIT
