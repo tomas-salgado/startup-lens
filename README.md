@@ -1,10 +1,10 @@
-# <img src="frontend/public/logo.svg" width="40" height="40" align="center" alt="StartupLens Logo">&nbsp;&nbsp;StartupLens - AI-powered search for startup advice
+# <img src="frontend/public/logo.svg" width="40" height="40" align="center" alt="StartupLens Logo">&nbsp;&nbsp;StartupLens - Video search for startup knowledge 🎥
 
 ![StartupLens Screenshot](frontend/public/app-screenshot.png)
 
 ## 📖 Overview
 
-StartupLens makes Y Combinator's vast video knowledge base searchable at a granular level. By processing over 500 YC videos and indexing each segment, the platform can point you to the exact moment in a video that answers your question. No more scrubbing through hour-long videos - just ask your question and get taken directly to the relevant clip.
+StartupLens makes Y Combinator's vast video knowledge base searchable at a granular level. By processing over 500 YC videos, the platform can point you to the exact moment in a video that answers your question. No more scrubbing through hour-long videos - just ask your question and get taken directly to the relevant clip.
 
 ## ✨ Key Features
 
