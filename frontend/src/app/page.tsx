@@ -129,7 +129,7 @@ function SearchContent() {
         </div>
         <h1 className={styles.title}>Startup Lens</h1>
         <p className={styles.subtitle}>
-          AI-powered search through Y Combinator&apos;s startup knowledge
+          AI-powered video search through Y Combinator&apos;s startup knowledge
         </p>
       </header>
 
