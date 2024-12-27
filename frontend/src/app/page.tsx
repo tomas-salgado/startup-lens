@@ -200,42 +200,40 @@ function SearchContent() {
       {sources.length > 0 && searchParams.get('q') && (
         <div className={styles.sourceVideos} ref={resultsRef}>
           <div className={styles.searchQuery}>
-            <span className={styles.searchQueryText}>Results for</span>
+            <span className={styles.searchQueryText}>{sources.length} {sources.length === 1 ? 'Result' : 'Results'} for</span>
             &ldquo;{searchParams.get('q')}&rdquo;
           </div>
           {sources.map((source, index) => (
-            <>
-              <div 
-                key={`video-${index}`}
-                className={styles.videoContainer}
-              >
-                <div className={styles.videoContent}>
-                  <div className={styles.videoTitle}>
-                    <div className={styles.videoName}>{source.videoName}</div>
-                    <div className={styles.titleRow}>
-                      <div className={styles.chapterName}>{source.chapterName}</div>
-                      <ShareButton source={source} />
-                    </div>
+            <div 
+              key={`video-${index}`}
+              className={styles.videoContainer}
+            >
+              <div className={styles.videoContent}>
+                <div className={styles.videoTitle}>
+                  <div className={styles.videoName}>{source.videoName}</div>
+                  <div className={styles.titleRow}>
+                    <div className={styles.chapterName}>{source.chapterName}</div>
+                    <ShareButton source={source} />
                   </div>
-                  <iframe
-                    width="100%"
-                    height="315"
-                    src={source.timestampUrl}
-                    title={`${source.videoName} - ${source.chapterName}`}
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope"
-                    allowFullScreen
-                    loading="lazy"
-                  />
                 </div>
-                {source.relevantQuestions && source.relevantQuestions.length > 0 && (
-                  <QuestionPillars
-                    selectedVideoIndex={index}
-                    questions={source.relevantQuestions}
-                    onQuestionClick={handleQuestionClick}
-                  />
-                )}
+                <iframe
+                  width="100%"
+                  height="315"
+                  src={source.timestampUrl}
+                  title={`${source.videoName} - ${source.chapterName}`}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope"
+                  allowFullScreen
+                  loading="lazy"
+                />
               </div>
-            </>
+              {source.relevantQuestions && source.relevantQuestions.length > 0 && (
+                <QuestionPillars
+                  selectedVideoIndex={index}
+                  questions={source.relevantQuestions}
+                  onQuestionClick={handleQuestionClick}
+                />
+              )}
+            </div>
           ))}
         </div>
       )}
