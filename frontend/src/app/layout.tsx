@@ -20,6 +20,26 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg',
   },
+  metadataBase: new URL('https://startuplens.ai'),
+  openGraph: {
+    title: 'Startup Lens',
+    description: 'AI-powered video search through Y Combinator\'s startup knowledge',
+    images: [
+      {
+        url: '/logo.svg',
+        width: 1200,
+        height: 1200,
+        alt: 'Startup Lens',
+      }
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Startup Lens',
+    description: 'AI-powered video search through Y Combinator\'s startup knowledge',
+    images: ['/logo.svg'],
+  },
 };
 
 export default function RootLayout({
