@@ -2,7 +2,7 @@
 
 Get advice from Y Combinator videos instantly. Ask a question, and we'll show you the exact video moments with the answers.
 
-![StartupLens Screenshot](public/app-screenshot.png)
+![StartupLens Screenshot](frontend/public/app-screenshot.png)
 
 ## Overview
 
