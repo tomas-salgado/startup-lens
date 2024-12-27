@@ -7,6 +7,20 @@
   background: #f8fafc;
 }
 
+@media (max-width: 768px) {
+  .pillarsContainer {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .pillar {
+    font-size: 0.875rem;
+    padding: 1rem 1.25rem;
+    line-height: 1.5;
+  }
+}
+
 .pillar {
   flex: 1;
   padding: 0.875rem 1.25rem;
