@@ -1,6 +1,7 @@
 # <img src="frontend/public/logo.svg" width="40" height="40" align="center" alt="StartupLens Logo">&nbsp;&nbsp;StartupLens - AI-powered search for startup advice
 
-Get advice from Y Combinator videos instantly. Ask a question, and we'll show you the exact video moments with the answers.
+Get advice from Y Combinator videos. Ask a question and get the exact video moments with the answers.
+
 
 ![StartupLens Screenshot](frontend/public/app-screenshot.png)
 
