@@ -12,7 +12,7 @@ StartupLens makes Y Combinator's vast video knowledge base searchable at a granu
 - 📚 **Rich Knowledge Base**: Search across 500+ Y Combinator startup videos
 - 🔍 **Smart Search**: Natural language search powered by vector similarity and Cohere's reranking
 - 💡 **Instant Follow-up**: Each clip comes with relevant follow-up questions to dive deeper
-- 🔗 **Easy Sharing**: Share specific video clips with timestamps with your team
+- 🔗 **Easy Sharing**: Share specific video clips by copying a generated link or through native sharing
 
 ## 🛠️ Technical Architecture
 
