@@ -26,19 +26,21 @@ export const metadata: Metadata = {
     description: 'AI-powered video search through Y Combinator\'s startup knowledge',
     images: [
       {
-        url: '/logo.svg',
+        url: '/app-screenshot.png',
         width: 1200,
-        height: 1200,
-        alt: 'Startup Lens',
+        height: 630,
+        alt: 'Startup Lens - AI-powered video search',
       }
     ],
     type: 'website',
+    siteName: 'Startup Lens',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Startup Lens',
     description: 'AI-powered video search through Y Combinator\'s startup knowledge',
-    images: ['/logo.svg'],
+    images: ['/app-screenshot.png'],
+    creator: '@startuplens',
   },
 };
 
