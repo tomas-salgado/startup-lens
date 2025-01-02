@@ -100,8 +100,6 @@ app.post('/api/track-search', (async (req, res, next) => {
       return;
     }
 
-    await emailSubscriptionService.updateSearchCount(email);
-    res.json({ message: 'Search count updated' });
   } catch (error) {
     next(error);
   }

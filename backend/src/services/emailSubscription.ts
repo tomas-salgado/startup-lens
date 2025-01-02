@@ -56,24 +56,6 @@ export class EmailSubscriptionService {
         }
     }
 
-    async updateSearchCount(email: string): Promise<void> {
-        try {
-            // Using SQL to increment the counter
-            const { error } = await this.supabase
-                .from('subscribers')
-                .update({ 
-                    search_count: "search_count + 1",
-                    last_search_at: new Date().toISOString()
-                })
-                .eq('email', email.toLowerCase());
-
-            if (error) throw error;
-        } catch (error) {
-            console.error('Error updating search count:', error);
-            throw error;
-        }
-    }
-
     async isSubscribed(email: string): Promise<boolean> {
         try {
             const { data, error } = await this.supabase
