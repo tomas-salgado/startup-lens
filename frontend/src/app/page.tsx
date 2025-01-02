@@ -87,7 +87,9 @@ function SearchContent({ onSearchComplete }: SearchContentProps) {
 
     // Increment search count through parent component
     onSearchComplete();
-    
+
+    try {
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sources`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
