@@ -22,9 +22,9 @@ export default function EmailPrompt({ onSubscribe, onDismiss, isLoading, error }
         <div className={styles.promptContainer}>
             <div className={styles.promptContent}>
                 <button onClick={onDismiss} className={styles.closeButton}>×</button>
-                <h3 className={styles.title}>Stay Updated</h3>
+                <h3 className={styles.title}>Stay Ahead</h3>
                 <p className={styles.description}>
-                    Get notified about new features and improvements to help you find startup advice faster.
+                    Get updated as Startup Lens expands - helping you find the startup advice you need, faster.
                 </p>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <input
