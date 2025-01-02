@@ -20,10 +20,11 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg',
   },
-  metadataBase: new URL('https://startuplens.ai'),
+  metadataBase: new URL('https://startuplens.app'),
   openGraph: {
     title: 'Startup Lens',
     description: 'AI-powered video search through Y Combinator\'s startup knowledge',
+    url: 'https://startuplens.app',
     images: [
       {
         url: '/app-screenshot.png',
