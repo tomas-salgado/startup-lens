@@ -62,3 +62,4 @@ next-env.d.ts
 ehthumbs.db
 Thumbs.db
 
+backend/data/

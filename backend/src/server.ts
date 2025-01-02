@@ -4,6 +4,7 @@ config();
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { QAService } from './qa';
+import emailSubscriptionService from './services/emailSubscription';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -57,6 +58,47 @@ app.post('/api/sources', (async (req, res, next) => {
     const sources = await qaService.getSources(question);
     console.log('Sources:', sources);
     res.json(sources);
+  } catch (error) {
+    next(error);
+  }
+}) as express.RequestHandler);
+
+// Email subscription endpoints
+app.post('/api/subscribe', (async (req, res, next) => {
+  try {
+    const { email } = req.body as { email: string };
+    
+    if (!email) {
+      res.status(400).json({ error: 'Email is required' });
+      return;
+    }
+
+    const success = await emailSubscriptionService.addSubscriber(email);
+    if (success) {
+      res.json({ message: 'Successfully subscribed' });
+    } else {
+      res.json({ message: 'Already subscribed' });
+    }
+  } catch (error) {
+    if (error instanceof Error && error.message === 'Invalid email address') {
+      res.status(400).json({ error: 'Invalid email address' });
+    } else {
+      next(error);
+    }
+  }
+}) as express.RequestHandler);
+
+app.post('/api/track-search', (async (req, res, next) => {
+  try {
+    const { email } = req.body as { email: string };
+    
+    if (!email) {
+      res.status(400).json({ error: 'Email is required' });
+      return;
+    }
+
+    await emailSubscriptionService.updateSearchCount(email);
+    res.json({ message: 'Search count updated' });
   } catch (error) {
     next(error);
   }

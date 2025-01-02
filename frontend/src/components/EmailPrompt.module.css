@@ -1,0 +1,175 @@
+.promptContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out;
+}
+
+.promptContent {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    position: relative;
+    border: 1px solid rgba(255, 107, 61, 0.1);
+    animation: pulse 2s infinite;
+}
+
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+    transform: scale(1.1);
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 0.5rem;
+}
+
+.description {
+    color: #4b5563;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    color: #374151;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #FF6B3D;
+    box-shadow: 0 0 0 2px rgba(255, 107, 61, 0.2);
+}
+
+.submitButton {
+    padding: 0.5rem 1rem;
+    background-color: #FF6B3D;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+    background-color: #e85a2c;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:active {
+    transform: translateY(0);
+}
+
+.submitButton:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.error {
+    color: #dc2626;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.disclaimer {
+    color: #6b7280;
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 4px 20px -1px rgba(255, 107, 61, 0.2), 0 2px 12px -1px rgba(255, 107, 61, 0.15);
+    }
+    100% {
+        box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 640px) {
+    .promptContainer {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 1rem;
+    }
+
+    .promptContent {
+        max-width: none;
+        border-radius: 12px 12px 0 0;
+        animation: slideInMobile 0.5s ease-out;
+    }
+
+    .form {
+        flex-direction: column;
+    }
+
+    .submitButton {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}
+
+@keyframes slideInMobile {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} 

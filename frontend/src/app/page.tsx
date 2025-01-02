@@ -8,6 +8,7 @@ import Logo from '../../components/Logo';
 import Disclaimer from '../components/Disclaimer';
 import ShareButton from '../components/ShareButton';
 import QuestionPillars from '../components/QuestionPillars';
+import EmailPrompt from '../components/EmailPrompt';
 
 interface VideoSource {
   videoName: string;
@@ -16,8 +17,12 @@ interface VideoSource {
   relevantQuestions?: string[];
 }
 
+interface SearchContentProps {
+  onSearchComplete: () => void;
+}
+
 // Create a new client component for the search functionality
-function SearchContent() {
+function SearchContent({ onSearchComplete }: SearchContentProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -80,6 +85,9 @@ function SearchContent() {
     setSources([]);
     setHasSearched(true);
 
+    // Increment search count through parent component
+    onSearchComplete();
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sources`, {
         method: 'POST',
@@ -103,7 +111,7 @@ function SearchContent() {
     } finally {
       setLoading(false);
     }
-  }, [question, router]);
+  }, [question, router, onSearchComplete]);
 
   // Load initial search results if query parameter exists
   useEffect(() => {
@@ -112,6 +120,8 @@ function SearchContent() {
       setQuestion(initialQuery);
       const syntheticEvent = { preventDefault: () => {} } as React.FormEvent;
       handleSubmit(syntheticEvent);
+      // Count this as a search too
+      onSearchComplete();
     }
   }, []);
 
@@ -243,14 +253,82 @@ function SearchContent() {
 
 // Update the main Home component
 export default function Home() {
+  const [searchCount, setSearchCount] = useState(0);
+  const [showEmailPrompt, setShowEmailPrompt] = useState(false);
+  const [emailPromptDismissed, setEmailPromptDismissed] = useState(false);
+  const [emailSubscribeLoading, setEmailSubscribeLoading] = useState(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  // Initialize state from localStorage
+  useEffect(() => {
+    const storedSearchCount = localStorage.getItem('searchCount');
+    const storedEmailDismissed = localStorage.getItem('emailPromptDismissed');
+    
+    if (storedSearchCount) {
+      setSearchCount(parseInt(storedSearchCount));
+    }
+    if (storedEmailDismissed === 'true') {
+      setEmailPromptDismissed(true);
+    }
+  }, []);
+
+  // Update showEmailPrompt based on searchCount
+  useEffect(() => {
+    console.log('Current search count:', searchCount);
+    if (searchCount >= 3 && !emailPromptDismissed) {
+      setShowEmailPrompt(true);
+    }
+  }, [searchCount, emailPromptDismissed]);
+
+  const handleEmailSubscribe = async (email: string) => {
+    setEmailSubscribeLoading(true);
+    setEmailError(null);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to subscribe');
+      }
+      
+      setEmailPromptDismissed(true);
+      localStorage.setItem('emailPromptDismissed', 'true');
+    } catch (error) {
+      setEmailError(error instanceof Error ? error.message : 'Failed to subscribe. Please try again.');
+    } finally {
+      setEmailSubscribeLoading(false);
+    }
+  };
+
+  const handleEmailDismiss = () => {
+    setShowEmailPrompt(false);
+    setEmailPromptDismissed(true);
+    localStorage.setItem('emailPromptDismissed', 'true');
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.background} />
       <div className={styles.container}>
         <Suspense fallback={<div>Loading...</div>}>
-          <SearchContent />
+          <SearchContent onSearchComplete={() => setSearchCount(prev => {
+            const newCount = prev + 1;
+            localStorage.setItem('searchCount', newCount.toString());
+            return newCount;
+          })} />
         </Suspense>
       </div>
+      {showEmailPrompt && (
+        <EmailPrompt
+          onSubscribe={handleEmailSubscribe}
+          onDismiss={handleEmailDismiss}
+          isLoading={emailSubscribeLoading}
+          error={emailError}
+        />
+      )}
       <Disclaimer />
     </main>
   );
