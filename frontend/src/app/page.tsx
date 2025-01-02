@@ -295,6 +295,7 @@ export default function Home() {
       }
       
       setEmailPromptDismissed(true);
+      setShowEmailPrompt(false);
       localStorage.setItem('emailPromptDismissed', 'true');
     } catch (error) {
       setEmailError(error instanceof Error ? error.message : 'Failed to subscribe. Please try again.');
