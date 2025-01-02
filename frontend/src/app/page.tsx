@@ -89,6 +89,21 @@ function SearchContent({ onSearchComplete }: SearchContentProps) {
     onSearchComplete();
 
     try {
+      // Track search if user is subscribed (stored in localStorage)
+      const subscribedEmail = localStorage.getItem('subscribedEmail');
+      if (subscribedEmail) {
+        try {
+          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/track-search`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: subscribedEmail }),
+          });
+        } catch (err) {
+          console.error('Failed to track search:', err);
+          // Don't block the search if tracking fails
+        }
+      }
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sources`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -293,6 +308,9 @@ export default function Home() {
       if (!response.ok) {
         throw new Error('Failed to subscribe');
       }
+      
+      // Store email in localStorage for tracking searches
+      localStorage.setItem('subscribedEmail', email);
       
       setEmailPromptDismissed(true);
       setShowEmailPrompt(false);
