@@ -1,5 +1,8 @@
 import { config } from 'dotenv';
-config();
+import path from 'path';
+
+// Load environment variables with explicit path
+config({ path: path.resolve(__dirname, '../.env') });
 
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
