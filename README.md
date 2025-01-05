@@ -100,6 +100,8 @@ npm run dev
 
 The backend API will be available at [http://localhost:3001](http://localhost:3001)
 
+NOTE: the backend makes requests to a Pinecone index named 'yc-search-engine', which contains the embeddings of every video chunk. You must set up your own Pinecone index with this name in order to make successful calls through your local app. 
+
 ### Configuration 
 
 #### Frontend Configuration
