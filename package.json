@@ -16,8 +16,10 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.33.1",
     "@pinecone-database/pinecone": "^4.0.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.0",
     "axios": "^1.7.9",
+    "better-sqlite3": "^11.9.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "html-entities": "^2.5.2",
